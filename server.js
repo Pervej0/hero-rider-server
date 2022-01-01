@@ -84,13 +84,12 @@ const run = async () => {
       if (details.status === "unblock") {
         updateDoc = { $set: { status: "active" } };
         const result = await userCollection.updateOne(filter, updateDoc);
-        console.log(result);
         res.json(result);
       }
     });
 
     // order payment
-    /*app.post("/create-payment-intent", async (req, res) => {
+    app.post("/create-payment-intent", async (req, res) => {
       const paymentDetails = req.body;
       const amount = paymentDetails.totalCost * 100;
       const paymentIntent = await stripe.paymentIntents.create({
@@ -98,11 +97,10 @@ const run = async () => {
         currency: "usd",
         payment_method_types: ["card"],
       });
-
       res.json({
         clientSecret: paymentIntent.client_secret,
       });
-    }); */
+    });
   } finally {
     // client.close();
   }
